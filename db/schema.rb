@@ -10,10 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_03_015728) do
+ActiveRecord::Schema.define(version: 2021_11_03_202634) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "visits", force: :cascade do |t|
+    t.string "full_url", null: false
+    t.string "host", null: false
+    t.string "pathname", null: false
+    t.string "referring_host"
+    t.bigint "website_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["website_id"], name: "index_visits_on_website_id"
+  end
 
   create_table "websites", force: :cascade do |t|
     t.string "title", null: false
