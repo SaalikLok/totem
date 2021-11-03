@@ -2,10 +2,9 @@ require 'rails_helper'
 
 describe Api::V1::WebsitesController, type: :controller do
   describe "GET#index" do
-
-    before do
-      3.times { create(:website) }
-    end
+    let!(:website1) { create(:website) }
+    let!(:website2) { create(:website) }
+    let!(:website3) { create(:website) }
 
     it "returns website data" do
       get :index
@@ -14,8 +13,8 @@ describe Api::V1::WebsitesController, type: :controller do
       expect(response.status).to eq 200
       expect(response.content_type).to eq("application/json; charset=utf-8")
 
-      expect(returned_json[0]["title"]).to eq "My site"
-      expect(returned_json[0]["url"]).to eq "mysite.com"
+      expect(returned_json[0]["title"]).to eq website1.title
+      expect(returned_json[0]["url"]).to eq website1.url
     end
 
     it "lists multiple websites" do
