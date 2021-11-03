@@ -9,7 +9,7 @@ Totem poles are monumental carvings consisting of poles, posts or pillars, carve
 
 Totem is the most important piece of your web analytics - the part that collects, stores, and sends site visit data. It's created so that you can make it your own, so that you can be free to represent your data visually, in any way that you would like. 
 
-I made it in mind to power a CLI app, or a local web app, or even to publish the website for one of my sites publicly.
+I made it to be flexible with how I use my site visit data. I could analyze it with a script, display it in a CLI tool, a local web app, or even publish site visit metrics online.
 
 ### Built with Ruby
 Ruby 3.0.0
