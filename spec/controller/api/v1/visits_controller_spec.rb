@@ -20,16 +20,64 @@ describe Api::V1::VisitsController, type: :controller do
   end
 
   describe "POST#create" do
-    xit "creates a new visit" do
+    it "creates a new visit" do
+      post_json = {
+        full_url: 'https://mysite.com/dashboard',
+        host: website.url,
+        pathname: '/dashboard',
+        referring_host: 'google.com',
+      }
+
+      prev_count = Visit.count
+      post(:create, params: post_json, format: :json)
+
+      expect(response.status).to eq 200
+      expect(Visit.count).to eq(prev_count + 1)
     end
 
-    xit "returns visit data on success" do
+    it "returns visit data on success" do
+      post_json = {
+        full_url: 'https://mysite.com/dashboard',
+        host: website.url,
+        pathname: '/dashboard',
+        referring_host: 'google.com',
+      }
+
+      post(:create, params: post_json, format: :json)
+      returned_json = JSON.parse(response.body)
+
+      expect(response.status).to eq 200
+      expect(returned_json["full_url"]).to eq("https://mysite.com/dashboard")
+      expect(returned_json["host"]).to eq("mysite.com")
+      expect(returned_json["pathname"]).to eq("/dashboard")
+      expect(returned_json["referring_host"]).to eq("google.com")
     end
 
-    xit "fails to create a new visit with bad params" do
+    it "fails to create a new visit with bad params" do
+      post_json = {
+        full_url: 'NOTHING'
+      }
+
+      post(:create, params: post_json, format: :json)
+      returned_json = JSON.parse(response.body)
+
+      expect(response.status).to eq 422
+      expect(returned_json["errors"]).not_to be_empty
     end
 
-    xit "fails to create a new visit with an incorrect website" do
+    it "fails to create a new visit with an unregistered website host" do
+      post_json = {
+        full_url: 'https://something.com/dashboard',
+        host: 'something.com',
+        pathname: '/dashboard',
+        referring_host: 'google.com',
+      }
+
+      post(:create, params: post_json, format: :json)
+      returned_json = JSON.parse(response.body)
+
+      expect(response.status).to eq 422
+      expect(returned_json["errors"]["website"][0]).to eq("Website must exist")
     end
   end
 end
