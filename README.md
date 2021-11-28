@@ -1,8 +1,10 @@
 # Totem
 
-A self-hosted API that lets you roll your personal web analytics server. With Totem, you can track how many visits were made to your website, while owning site visit data and implementation.
+### NO LONGER ACTIVELY DEVELOPED
 
-Currently in active development. Docs and demos coming soon.
+This was a fun project to extend learning, but it has served its time. Technically the code here is functional, albeit an incomplete feature set.
+
+A self-hosted API that lets you roll your personal web analytics server. With Totem, you can track how many visits were made to your website, while owning site visit data and implementation.
 
 ### The Name and Intention
 Totem poles are monumental carvings consisting of poles, posts or pillars, carved with symbols or figures. They're made with love and care, custom-built from the ground up. 
